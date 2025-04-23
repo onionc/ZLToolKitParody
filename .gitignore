@@ -28,3 +28,4 @@
 *.app
 /X64/
 /build/
+/test/

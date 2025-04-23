@@ -14,7 +14,7 @@ set(SOURCES
 # 测试文件列表
 set(TEST_LIST
     tests/test_variant.cpp
-
+    tests/test_ini.cpp
 )
 
 # 为每个测试文件生成可执行文件
@@ -28,7 +28,7 @@ foreach(TEST_FILE ${TEST_LIST})
     # 头文件路径
     target_include_directories(${TEST_NAME}
         PRIVATE 
-            ${PROJECT_SOURCE_DIR}/tools
+            ${PROJECT_SOURCE_DIR}
     )
 
 endforeach()
