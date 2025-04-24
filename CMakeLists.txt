@@ -8,6 +8,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(SOURCES
     tools/variant.cpp
     tools/utils.cpp
+    tools/cmd.cpp
 )
 
 
@@ -15,6 +16,7 @@ set(SOURCES
 set(TEST_LIST
     tests/test_variant.cpp
     tests/test_ini.cpp
+    tests/test_cmd_option.cpp
 )
 
 # 为每个测试文件生成可执行文件

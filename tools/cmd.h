@@ -134,6 +134,7 @@ public:
             _map_char_index.emplace(option._short_opt, index);
         }
         _map_options.emplace(index, std::forward<Option>(option));
+        return *this;
     }
 
     OptionParser &operator<<(const Option &option){

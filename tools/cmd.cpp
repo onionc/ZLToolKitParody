@@ -1,5 +1,3 @@
-#pragma once
-
 #include "cmd.h"
 #include <vector>
 
@@ -13,10 +11,13 @@ namespace toolkit{
     void OptionParser::operator() (mINI &all_args, int argc, char *argv[], const std::shared_ptr<std::ostream> &stream) {
         std::vector<struct option> vec_long_opt;
         std::string str_short_opt;
+       
         do {
             struct option tmp;
             for(auto &pr : _map_options){
+                
                 auto &opt = pr.second;
+                opt(stream, "1");
                 // 长参数
                 tmp.name = (char *) opt._long_opt.data();
                 tmp.has_arg = opt._type;
@@ -40,6 +41,6 @@ namespace toolkit{
             tmp.val = 0;
             vec_long_opt.emplace_back(tmp);
             
-        }
+        }while(0);
     }
 }
