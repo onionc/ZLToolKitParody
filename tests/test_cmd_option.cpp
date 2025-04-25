@@ -18,12 +18,17 @@ int main(int argc, char *argv[]){
             connect(stream);
             return;
         }*/
-        cout << "optionparser cb lambda";
+        *stream << "optionparser cb lambda";
     }));
-    (*_parser) << Option('T', "test", Option::ArgNone, nullptr, true, "TEST X", nullptr);
+    (*_parser) << Option('T', "test", Option::ArgRequired, nullptr, true, "TEST X", nullptr);
 
-
-    (*_parser)(m, argc, argv, coutPtr);
+    try{
+        (*_parser)(m, argc, argv, coutPtr);
+        cout << "22";
+    }catch (std::exception &ex) {
+        cout << ex.what() << endl;
+    }
+    
 
 
 

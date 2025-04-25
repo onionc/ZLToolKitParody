@@ -51,6 +51,12 @@ public:
         return _cb ? _cb(stream, arg) : true;
     }
 
+    std::string dump() {
+        std::stringstream ss;
+        ss << "" << _short_opt << ":"  << _long_opt;
+        return ss.str();
+    }
+
 private:
     friend class OptionParser;
     bool _must_exist = false;
