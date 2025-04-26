@@ -53,7 +53,7 @@ public:
 
     std::string dump() {
         std::stringstream ss;
-        ss << "" << _short_opt << ":"  << _long_opt;
+        ss << "" << _short_opt << ":"  << _long_opt << " type="<<_type;
         return ss.str();
     }
 

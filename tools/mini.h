@@ -54,6 +54,7 @@ public:
             // 如果没有 tag （对应配置中的[xxx]）直接输出
             if(kv[0].empty()){
                 front += kv[1] + "=" + pr.second + "\r\n";
+                continue;
             }
 
             // 如果 tag 和当前的不一样，则输出 [xxx]
