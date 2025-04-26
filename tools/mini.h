@@ -6,6 +6,7 @@
 #include <fstream>
 #include "tools/variant.h"
 #include "tools/utils.h"
+#include <iostream>
 
 namespace toolkit{
 
@@ -15,6 +16,8 @@ public:
 
     // 解析字符串，类似ini配置解析为 "http.port" "8080"
     void parse(const std::string &text){
+        (*this).clear();
+        
         // 拆分
         std::vector<std::string> lines = tokenize(text, "\n");
         std::string symbol, tag;
@@ -25,12 +28,13 @@ public:
             if(line.empty() || line.front() == ';' || line.front() == '#'){
                 continue;
             }
-
             if(line.size() >=3 && line.front()=='[' && line.back()==']'){
                 tag = trim(line.substr(1, line.size() - 2));
             }else{
+                
                 auto at = line.find('=');
-                symbol = trim(tag+"." + line.substr(0, at));
+                
+                symbol = trim(tag + "." + line.substr(0, at));
                 (*this)[symbol] = (at==std::string::npos ? std::string() : trim(line.substr(at+1)));
             }
 

@@ -5,6 +5,7 @@ using namespace std;
 using namespace toolkit;
 
 int main(){
+
     mINI ini;
 
 
@@ -47,5 +48,19 @@ int main(){
     ini["ws.port"] = 8081;
     ini["ws.bool"] = false;
     cout<<ini.dump()<<endl;
+    
 
+     // 测试一个bug
+     mINI a;
+     a["a"] = 1;
+     a["b.x"] = 2;
+     a["c"] = 3;
+     std::cout<< a.dump() << std::endl;
+     // 保存文件
+     cout<<"测试文件保存  --------------------"<<endl;
+     a.dumpFile();
+     // 从文件读取
+     cout<<"测试文件读取  --------------------"<<endl;
+     a.parseFile();
+     cout<<a.dump()<<endl;
 }

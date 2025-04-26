@@ -1,7 +1,6 @@
 #include "cmd.h"
 #include <vector>
 #include <mutex>
-#include <iostream>
 
 #if defined(__WIN32)
 #include "win32/getopt.h"
