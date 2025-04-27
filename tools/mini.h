@@ -6,7 +6,6 @@
 #include <fstream>
 #include "tools/variant.h"
 #include "tools/utils.h"
-#include <iostream>
 
 namespace toolkit{
 
