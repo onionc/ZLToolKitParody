@@ -31,5 +31,5 @@ int main(int argc, char *argv[]){
     }
 
     cout<<"end."<<endl;
-
+    return 0;
 }

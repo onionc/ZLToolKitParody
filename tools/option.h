@@ -6,7 +6,6 @@
 #include <sstream>
 #include "mini.h"
 
-
 namespace toolkit{
     
 class Option{
@@ -155,10 +154,15 @@ public:
     void delOption(const char *key){
         for(auto &pr : _map_options){
             if(pr.second._long_opt == key){
-                _map_char_index.erase(pr.second._short_opt);
+                
+                if(pr.second._short_opt){
+                    _map_char_index.erase(pr.second._short_opt);
+            
+                }
+                
+                _map_options.erase(pr.first);
+                break;
             }
-            _map_options.erase(pr.first);
-            break;
         }
     }
 

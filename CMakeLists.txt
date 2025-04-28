@@ -9,6 +9,7 @@ set(SOURCES
     tools/variant.cpp
     tools/utils.cpp
     tools/option.cpp
+    tools/cmd.cpp
 )
 
 
@@ -17,6 +18,7 @@ set(TEST_LIST
     tests/test_variant.cpp
     tests/test_ini.cpp
     tests/test_cmd_option.cpp
+    tests/test_cmd.cpp
 )
 
 # 为每个测试文件生成可执行文件

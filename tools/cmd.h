@@ -33,6 +33,12 @@ public:
         return ret;
     }
 
+    void delOption(const char *key){
+        if(_parser){
+            _parser->delOption(key);
+        }
+    }
+
 protected:
     std::shared_ptr<OptionParser> _parser;
 
@@ -133,6 +139,7 @@ public:
             ss << "未识别的命令\"" << cmd << "\"，输入 \"help\" 获取帮助。";
             throw std::invalid_argument(ss.str());
         }
+      
         (*it->second)((int)argc, &argv[0], stream);
     }
 
@@ -162,5 +169,70 @@ private:
     std::recursive_mutex _mtx;
     std::map<std::string, std::shared_ptr<CMD>> _cmd_map;
 };
+
+// 帮助命令
+class CMD_help : public CMD {
+public:
+    CMD_help() {
+        _parser = std::make_shared<OptionParser>( [](const std::shared_ptr<std::ostream> &stream, mINI &) {
+            CMDRegister::Instance().printHelp(stream);
+        });
+    }
+
+    const char* description() const override {
+        return "打印帮助信息";
+    }
+};
+
+#define CMD_quit CMD_exit
+class ExitException : public std::exception {};
+
+// 退出程序命令
+class CMD_exit : public CMD {
+public:
+    CMD_exit() {
+        _parser = std::make_shared<OptionParser>( [](const std::shared_ptr<std::ostream>&, mINI &) {
+            throw ExitException();
+        });
+    }
+
+    const char* description() {
+        return "退出 shell";
+    }
+};
+
+
+// 清空屏幕
+class CMD_clear : public CMD {
+public:
+    CMD_clear() {
+        _parser = std::make_shared<OptionParser>( [this](const std::shared_ptr<std::ostream> &stream, mINI &) {
+            clear(stream);
+        });
+
+    }
+
+    const char* description() {
+        return "清空屏幕输出";
+    }
+private:
+    void clear(const std::shared_ptr<std::ostream> &stream) {
+        // x1b[2J 清屏， \x1b[H 光标移动到左上角
+        (*stream) << "\x1b[2J\x1b[H";
+        stream->flush();
+    }
+};
+
+
+// 几个宏
+// 获取命令
+#define GET_CMD(name) (*(CMDRegister::Instance()[name]))
+// 执行命令
+#define CMD_DO(name, ...) (*(CMDRegister::Instance()[name]))(__VA_ARGS__)
+// 注册命令，实现类需要是CMD_XXXX 格式（XXXX为name）
+#define REGIST_CMD(name) CMDRegister::Instance().registerCMD(#name, std::make_shared<CMD_##name>());
+
+
+
 
 }
