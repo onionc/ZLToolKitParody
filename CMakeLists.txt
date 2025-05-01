@@ -19,6 +19,7 @@ set(TEST_LIST
     tests/test_ini.cpp
     tests/test_cmd_option.cpp
     tests/test_cmd.cpp
+    tests/test_function_traits.cpp
 )
 
 # 为每个测试文件生成可执行文件

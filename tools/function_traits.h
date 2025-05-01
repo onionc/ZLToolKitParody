@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <cstddef>
 
 namespace toolkit{
 
@@ -28,7 +29,7 @@ public:
 
 // 函数指针
 template<typename Ret, typename... Args>
-struct function_traits<Ret(*)(Args...)> : function_traits<Ret<Args...)>{};
+struct function_traits<Ret(*)(Args...)> : function_traits<Ret(Args...)>{};
 
 // std::fucntion
 template<typename Ret, typename... Args>
