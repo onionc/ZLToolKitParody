@@ -25,13 +25,14 @@ std::function<int(double, const string&)> std_function = normal_func;
 
 // 成员函数
 class MyClass {
-    public:
+public:
     float member_func(int, char){ return 0.5f; }
-    float member_func_const(int, char) const { return 0.5f; }
+    double member_func_const(int, char) const { return 0.5f; }
 };
 
 // 函数对象（仿函数）
 class Functor{
+public:
     int operator()(float, bool){
         return 99;
     }
@@ -55,8 +56,16 @@ int main(){
     cout<<"\nstd::function：\n";
     cout<<"\t参数个数："<< function_traits<decltype(std_function)>::arity << endl;
 
-    cout<<"\n成员函数：\n";
+    cout<<"\n成员函数  非const和const：\n";
     cout<<"\t参数个数："<<function_traits<decltype(&MyClass::member_func)>::arity << endl;
+    cout<<"\t参数个数："<<function_traits<decltype(&MyClass::member_func_const)>::arity << endl;
+    cout<<"\t返回类型：";
+    print_type<function_traits<decltype(&MyClass::member_func_const)>::return_type>();
 
+    cout<<"\n仿函数：\n";
+    cout<<"\t参数个数："<<function_traits<Functor>::arity << endl;
+    cout<<"\t返回类型：";
+    print_type<function_traits<Functor>::return_type>();
+    
     return 0;
 }
